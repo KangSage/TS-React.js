@@ -27,6 +27,7 @@ function todosReducer(state: TodosState, action: Action): TodosState {
   switch (action.type) {
     case 'CREATE':
       let nextId = Math.max(...state.map(todo => todo.id)) + 1;
+      // 리스트 전부 삭제한 이후 -Infinite가 리턴되어 id가 잘못들어가는 버그 수정
       nextId = isFinite(nextId) ? nextId : 1;
       return state.concat({
         id: nextId,
